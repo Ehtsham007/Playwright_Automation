@@ -47,14 +47,7 @@ const config = {
       },
     } 
     
-    ,{
-       name: 'chrome',
-       use: {
-        //...devices['Edge'],
-       browserName : 'chromium',
-       headless : true
-      }
-    }
+    
   ],
   
 

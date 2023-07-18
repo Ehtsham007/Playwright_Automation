@@ -21,14 +21,24 @@ test.only('Playwright Second testcase' , async ({page})=>
 //first step 
 //const context = await browser.newContext();
 //const page = await context.newPage();
+const username= page.locator('Input#username');
+const btnclick= page.locator('#signInBtn');
 await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
 console.log(await page.title());
-await page.locator('Input#username').type('ehtsham@gmail.com');
-await page.locator("[type='password']").type('eht1234');
-await page.locator('#signInBtn').click();
+await username.type('ehtsham@gmail.com');
+await page.locator("[type='password']").type('learning');
+await btnclick.click();
 console.log(await page.locator("[style*='block']").textContent());
 //automaticaly wait for 5 sec to see if the text will appear 
 await expect(page.locator("[style*='block']")).toContainText("Incorrect");
+
+await username.fill("");
+await username.fill("rahulshettyacademy");
+await btnclick.click();
+
+console.log(await page.locator(".card-body a").first().textContent());
+
+
 
 
 });
