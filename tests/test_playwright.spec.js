@@ -23,6 +23,7 @@ test.only('Playwright Second testcase' , async ({page})=>
 //const page = await context.newPage();
 const username= page.locator('Input#username');
 const btnclick= page.locator('#signInBtn');
+const itemTitle = page.locator(".card-body a");
 await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
 console.log(await page.title());
 await username.type('ehtsham@gmail.com');
@@ -33,12 +34,23 @@ console.log(await page.locator("[style*='block']").textContent());
 await expect(page.locator("[style*='block']")).toContainText("Incorrect");
 
 await username.fill("");
+
 await username.fill("rahulshettyacademy");
-await btnclick.click();
+//race condition
+await Promise.all(
+[
 
-console.log(await page.locator(".card-body a").first().textContent());
+     page.waitForNavigation(), 
+     btnclick.click() ,
 
+]
+);
 
+//console.log(await page.locator(".card-body a").first().textContent());
+//console.log(await page.locator(".card-body a").nth(1).textContent());
+const itemtittleALL= await itemTitle.allTextContents();
+
+console.log(itemtittleALL);
 
 
 });
