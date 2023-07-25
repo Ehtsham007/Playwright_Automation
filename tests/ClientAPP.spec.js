@@ -12,6 +12,8 @@ test('Client APP Test Cases' , async ({page})=>
 const email= page.locator('#userEmail');
 const btnclick= page.locator("[name ='login']");
 const password = page.locator('#userPassword');
+const products = page.locator(".card-body");
+const productname = "iphone 13 pro";
 await page.goto("https://rahulshettyacademy.com/client/");
 console.log(await page.title());
 await email.type('rashid.ehtsham@gmail.com');
@@ -19,6 +21,24 @@ await password.type('IamKing@000');
 await btnclick.click();
 await page.waitForLoadState('networkidle');
 console.log(await page.locator(".card-body b").allTextContents());
+const count = await products.count();
+
+for ( let i=0; i<count; ++i)
+
+{
+if( await products.nth(i).locator('b').textContent() === productname)
+{
+    await products.nth(i).locator('text = Add to Cart').click();
+    break;
+}
+
+}
+
+//await page.pause();
+
+
+
+
 
 
 /////console.log(await page.locator("[style*='block']").textContent());
